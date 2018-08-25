@@ -1,5 +1,9 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Fasetto.Word.ViewModel
 {
@@ -16,9 +20,13 @@ namespace Fasetto.Word.ViewModel
 
         #region Public Properties
 
+        public double WindowMinimumWidth { get; set; } = 400;
+        public double WindowMinimumHeight { get; set; } = 400;
+
         public int ResizeBorder { get; set; } = 6;
 
         public Thickness ResizeBorderThickness => new Thickness(this.ResizeBorder + this.OuterMarginSize);
+        public Thickness InnerContentPadding => new Thickness(this.ResizeBorder);
 
         public int OuterMarginSize
         {
@@ -43,6 +51,18 @@ namespace Fasetto.Word.ViewModel
 
         #endregion
 
+        #region Commands
+
+        public ICommand MinimizeCommand { get; set; }
+
+        public ICommand MaximizeCommand { get; set; }
+
+        public ICommand CloseCommand { get; set; }
+
+        public ICommand MenuCommand { get; set; }
+
+        #endregion
+
         #region Constructor
 
         public MainViewModel()
@@ -57,8 +77,25 @@ namespace Fasetto.Word.ViewModel
                 this.RaisePropertyChanged(nameof(this.WindowRadius));
                 this.RaisePropertyChanged(nameof(this.WindowCornerRadius));
             };
+
+
+            this.MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
+            this.MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
+            this.CloseCommand = new RelayCommand(() => mWindow.Close());
+            this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
         }
 
         #endregion
+
+        #region Private Helpers
+
+        private Point GetMousePosition()
+        {
+            var position = Mouse.GetPosition(mWindow);
+
+            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
+        }
+
+    #endregion
     }
 }

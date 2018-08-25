@@ -9,6 +9,7 @@
         Icon="/Images/Logo/logo-small.png"
         WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        MinWidth="{Binding WindowMinimumWidth}" MinHeight="{Binding WindowMinimumHeight}"
         
         Title="Welcome, friend!" Height="600" Width="900">
 
@@ -21,6 +22,10 @@
                             
                             <Grid>
 
+                                <Border x:Name="Container"
+                                        Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"/>
+
                                 <Border CornerRadius="{Binding WindowCornerRadius}"
                                         Background="{StaticResource ForegroundLightBrush}">
                                     <Border.Effect>
@@ -30,6 +35,10 @@
 
                                 <Grid>
 
+                                    <Grid.OpacityMask>
+                                        <VisualBrush Visual="{Binding ElementName=Container}"/>
+                                    </Grid.OpacityMask>
+                                    
                                     <Grid.RowDefinitions>
 
                                         <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"/>
@@ -38,12 +47,54 @@
 
                                     </Grid.RowDefinitions>
 
-                                    <Grid Panel.ZIndex="1" Background="Red">
-                                        
-                                        
+                                    <Grid Panel.ZIndex="1">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}">
+                                            <Image Source="/Images/Logo/logo-small.png" SnapsToDevicePixels="True"/>
+                                        </Button>
+
+
+                                        <Viewbox Grid.Column="1" Margin="0">
+                                            <TextBlock Style="{StaticResource HeaderText}"
+                                                       Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Title, FallbackValue='Welcome, friend!'}"/>
+                                        </Viewbox>
+
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <Button Command="{Binding MinimizeCommand}" Style="{StaticResource WindowControlButton}" Content="_"/>
+                                            <Button Command="{Binding MaximizeCommand}" Style="{StaticResource WindowControlButton}" Content="[ ]"/>
+                                            <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowCloseButton}" Content="X"/>
+                                        </StackPanel>
                                         
                                     </Grid>
 
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0,0.2,0,0">
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"/>
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5"/>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0"/>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        
+                                    </Border>
+
+                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                                    </Border>
+                                    
                                 </Grid>
                                 
                             </Grid>
@@ -63,6 +114,7 @@
                       />
     </WindowChrome.WindowChrome>
     
-    <StackPanel>
-    </StackPanel>
+    <Grid Background="Red">
+        <Button Content="Test"/>
+    </Grid>
 </Window>

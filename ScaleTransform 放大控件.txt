@@ -1,0 +1,7 @@
+如下方式可以放大横坐标宽度
+
+<Setter Property="LayoutTransform">
+	<Setter.Value>
+		<ScaleTransform ScaleX="1.5"/>
+	</Setter.Value>
+</Setter>

@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fasetto.Word", "Fasetto.Word\Fasetto.Word.csproj", "{CCADC3EE-098C-410D-8428-07C643D35A13}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{78AB665F-8A41-4F1D-AF40-9AD6D0AE7956}"
+	ProjectSection(SolutionItems) = preProject
+		ScaleTransform 放大控件.txt = ScaleTransform 放大控件.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
