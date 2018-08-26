@@ -9,16 +9,8 @@
       Title="LoginPage">
 
 
-    <Border Background="{StaticResource WordBlueBrush}">
+    <Border>
         <Grid>
-            <Grid.Background>
-                <ImageBrush TileMode="Tile"
-                            ViewportUnits="Absolute"
-                            Viewport="0,0,500,500"
-                            ImageSource="/Images/Backgrounds/emoji-background.png"
-                            />
-            </Grid.Background>
-
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <StackPanel VerticalAlignment="Center"
                             HorizontalAlignment="Center"
