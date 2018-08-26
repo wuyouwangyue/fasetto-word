@@ -1,0 +1,9 @@
+可以达到平铺xiaoguo
+
+<Grid.Background>
+    <ImageBrush TileMode="Tile"
+                ViewportUnits="Absolute"
+                Viewport="0,0,500,500"
+                ImageSource="/Images/Backgrounds/emoji-background.png"
+                />
+</Grid.Background>

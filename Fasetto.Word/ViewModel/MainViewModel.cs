@@ -48,6 +48,7 @@ namespace Fasetto.Word.ViewModel
 
         public GridLength TitleHeightGridLength => new GridLength(this.TitleHeight + this.ResizeBorder);
 
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
 
         #endregion
 
@@ -83,6 +84,8 @@ namespace Fasetto.Word.ViewModel
             this.MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
             this.CloseCommand = new RelayCommand(() => mWindow.Close());
             this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
+
+            var resizer = new WindowResizer(mWindow);
         }
 
         #endregion
