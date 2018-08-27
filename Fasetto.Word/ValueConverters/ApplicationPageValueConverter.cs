@@ -13,6 +13,9 @@ namespace Fasetto.Word
                 case ApplicationPage.Login:
                     return new LoginPage();
 
+                case ApplicationPage.Chat:
+                    return new ChatPage();
+
                 default:
                     Debugger.Break();
                     return null;

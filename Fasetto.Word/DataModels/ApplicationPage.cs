@@ -3,5 +3,6 @@
     public enum ApplicationPage
     {
         Login,
+        Chat,
     }
 }

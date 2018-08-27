@@ -133,8 +133,18 @@
                         ImageSource="/Images/Backgrounds/emoji-background.png"
                         />
             </Grid.Background>
-
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
             <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
+
+
+
+
+            <local:SideMenuControl/>
+
         </Grid>
     </Border>
     
