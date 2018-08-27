@@ -5,9 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Fasetto.Word"
       mc:Ignorable="d" 
+                
+      DataContext="{Binding Source={StaticResource Locator}, Path=Login}"          
+                
       d:DesignHeight="700" d:DesignWidth="700"
-      Title="LoginPage">
-
+      Title="Login">
 
     <Border>
         <Grid>
@@ -34,15 +36,21 @@
                                        Margin="0,0,0,20"
                                        />
 
-                            <TextBox Tag="Email"/>
-                            <PasswordBox Tag="Password" Margin="0,0,0,30"/>
+                            <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                     Tag="Email"/>
+                            <PasswordBox x:Name="passwordText" Tag="Password" Margin="0,0,0,30"/>
 
-                            <Button  Content="Next" HorizontalAlignment="Center" Style="{StaticResource LoginButton}"
-                                     Click="Button_Click"/>
+                            <Button  Content="Login" HorizontalAlignment="Center" 
+                                     Command="{Binding LoginCommand}"
+                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"
+                                     local:IsBusyProperty.Value="{Binding LoginIsRunning}"
+                                     />
                         </StackPanel>
                     </Border>
 
-                    <Button Style="{StaticResource TextButton}" Content="I already have an account" HorizontalAlignment="Center"/>
+                    <Button Style="{StaticResource TextButton}" 
+                            Content="I already have an account" 
+                            HorizontalAlignment="Center"/>
                 </StackPanel>
 
             </ScrollViewer>

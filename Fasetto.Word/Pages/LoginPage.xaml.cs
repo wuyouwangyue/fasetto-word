@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,16 +19,13 @@ namespace Fasetto.Word
     /// <summary>
     /// LoginPage.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginPage : BasePage
+    public partial class LoginPage : BasePage, IHavePassword
     {
         public LoginPage()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            this.AnimateOutAnsync();
-        }
+        public SecureString SecurePassword => passwordText.SecurePassword;
     }
 }

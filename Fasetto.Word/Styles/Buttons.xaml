@@ -2,12 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Fasetto.Word">
 
-    <ResourceDictionary.MergedDictionaries>
-
-        <ResourceDictionary Source="Colors.xaml"/>
-        <ResourceDictionary Source="Fonts.xaml"/>
-
-    </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" x:Key="Hoverless">
         <Setter Property="Background" Value="Transparent" />
@@ -74,7 +68,7 @@
         
     </Style>
 
-    <Style TargetType="{x:Type Button}" x:Key="LoginButton" BasedOn="{StaticResource BaseStyle}">
+    <Style TargetType="{x:Type Button}"  BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Background" Value="{StaticResource WordOrangeBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundLightBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -82,6 +76,8 @@
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
         <Setter Property="Padding" Value="50,10"/>
         <Setter Property="Margin" Value="0,10"/>
+
+        <Setter Property="local:IsBusyProperty.Value" Value="False"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -91,16 +87,29 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="True">
+
+                        <Grid>
+
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       Focusable="False"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       Margin="{TemplateBinding Padding}"
+                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                       Visibility="{TemplateBinding local:IsBusyProperty.Value, Converter={local:BooleanToVisibilityConverter}}"
+                                       />
+
+                            <TextBlock Style="{StaticResource SpinningText}"
+                                       Focusable="False"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       Visibility="{TemplateBinding local:IsBusyProperty.Value, Converter={local:BooleanToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
                         
-                        <TextBlock Text="{TemplateBinding Content}"
-                                   Focusable="False"
-                                   FontFamily="{TemplateBinding FontFamily}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                   Margin="{TemplateBinding Padding}"
-                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   />
+
                     </Border>
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
