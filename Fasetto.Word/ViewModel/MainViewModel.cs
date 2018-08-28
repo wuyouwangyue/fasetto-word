@@ -48,7 +48,7 @@ namespace Fasetto.Word.ViewModel
 
         public GridLength TitleHeightGridLength => new GridLength(this.TitleHeight + this.ResizeBorder);
 
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Chat;
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
 
         #endregion
 

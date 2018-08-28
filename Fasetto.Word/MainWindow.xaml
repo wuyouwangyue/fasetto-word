@@ -61,7 +61,7 @@
                                         <!-- 标题 -->
                                         <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
                                             <StackPanel>
-                                                <TextBlock FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeRegular}" Margin="0,0,0,-5">
+                                                <TextBlock FontFamily="{StaticResource LatoBold}" FontSize="{StaticResource FontSizeAverge}" Margin="0,0,0,-5">
                                                     <Run Text="W" Foreground="{StaticResource WordOrangeBrush}"/><Run Text="O" Foreground="{StaticResource WordBlueBrush}"/><Run Text="R" Foreground="{StaticResource WordRedBrush}"/><Run Text="D" Foreground="{StaticResource WordGreenBrush}"/>
                                                 </TextBlock>
 
@@ -138,12 +138,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
+            <Frame x:Name="MainFrame" Grid.Column="1"
+                   Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
 
-
-
-
-            <local:SideMenuControl/>
+            <local:SideMenuControl>
+                <local:ChatListControl/>
+            </local:SideMenuControl>
 
         </Grid>
     </Border>
