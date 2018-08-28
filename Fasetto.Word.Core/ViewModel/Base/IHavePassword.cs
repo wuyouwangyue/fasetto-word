@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Fasetto.Word
+namespace Fasetto.Word.Core
 {
     public interface IHavePassword
     {

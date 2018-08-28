@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 
-namespace Fasetto.Word
+namespace Fasetto.Word.Core
 {
     public class ChatListItemViewModel : ViewModelBase
     {

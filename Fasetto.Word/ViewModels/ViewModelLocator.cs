@@ -1,7 +1,8 @@
 using CommonServiceLocator;
+using Fasetto.Word.Core;
 using GalaSoft.MvvmLight.Ioc;
 
-namespace Fasetto.Word.ViewModel
+namespace Fasetto.Word
 {
     /// <summary>
     /// This class contains static references to all the view models in the
@@ -20,6 +21,8 @@ namespace Fasetto.Word.ViewModel
             SimpleIoc.Default.Register<LoginViewModel>();
         }
 
+
+
         public MainViewModel Main
         {
             get
@@ -27,7 +30,6 @@ namespace Fasetto.Word.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-
         public LoginViewModel Login
         {
             get

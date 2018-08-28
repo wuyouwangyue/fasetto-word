@@ -1,4 +1,4 @@
-﻿<local:BasePage x:Class="Fasetto.Word.LoginPage"
+﻿<local:BasePage x:Class="Fasetto.Word.RegisterPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,8 @@
                 
       DataContext="{Binding Source={StaticResource Locator}, Path=Login}"          
                 
-      d:DesignHeight="500" d:DesignWidth="450"
-      Title="Login">
+      d:DesignHeight="700" d:DesignWidth="700"
+      Title="Register">
 
     <Border>
         <Grid>
@@ -24,7 +24,7 @@
                             Padding="15,50,15,15"
                             Width="330">
                         <StackPanel>
-                            <TextBlock Text="Sign In"
+                            <TextBlock Text="Sign Up"
                                        FontSize="{StaticResource FontSizeLarge}"
                                        FontFamily="{StaticResource LatoRegular}"
                                        Foreground="{StaticResource WordBlueBrush}"
@@ -40,7 +40,7 @@
                                      Tag="Email"/>
                             <PasswordBox x:Name="passwordText" Tag="Password" Margin="0,0,0,30"/>
 
-                            <Button  Content="Login" HorizontalAlignment="Center" 
+                            <Button  Content="Regiter" HorizontalAlignment="Center" 
                                      Command="{Binding LoginCommand}"
                                      CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Page}}"
                                      local:IsBusyProperty.Value="{Binding LoginIsRunning}"
@@ -49,7 +49,7 @@
                     </Border>
 
                     <Button Style="{StaticResource TextButton}" 
-                            Content="Or, create a free account..." 
+                            Content="Or, I already have an account..." 
                             HorizontalAlignment="Center"/>
                 </StackPanel>
 

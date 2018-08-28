@@ -1,14 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Fasetto.Word.ViewModel
+namespace Fasetto.Word.Core
 {
     public class LoginViewModel : ViewModelBase
     {
@@ -27,24 +23,34 @@ namespace Fasetto.Word.ViewModel
 
         public ICommand LoginCommand { get; set; }
 
+        public ICommand RegisterComamnd { get; set; }
+
         #endregion
 
         #region Constructor
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand<object>(async (parameter) => await Login(parameter));
+            LoginCommand = new RelayCommand<object>(async (parameter) => await LoginAsync(parameter));
+            RegisterComamnd = new RelayCommand(async () => await RegisterAsync());
         }
 
         #endregion
 
-        public async Task Login(object parameter)
+        public async Task LoginAsync(object parameter)
         {
             await this.RunCommand(() => this.LoginIsRunning, async () =>
             {
                 await Task.Delay(1000);
                 var s = (parameter as IHavePassword)?.SecurePassword.Unsecure();
             });
+        }
+
+        public async Task RegisterAsync()
+        {
+            //TODO Regitser
+
+            await Task.Delay(1000);
         }
     }
 }

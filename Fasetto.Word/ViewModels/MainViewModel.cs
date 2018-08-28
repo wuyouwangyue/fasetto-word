@@ -1,3 +1,4 @@
+using Fasetto.Word.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -5,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Fasetto.Word.ViewModel
+namespace Fasetto.Word
 {
     public class MainViewModel : ViewModelBase
     {
@@ -99,6 +100,6 @@ namespace Fasetto.Word.ViewModel
             return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
         }
 
-    #endregion
+        #endregion
     }
 }

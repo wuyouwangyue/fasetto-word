@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fasetto.Word.Core;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -15,6 +16,9 @@ namespace Fasetto.Word
 
                 case ApplicationPage.Chat:
                     return new ChatPage();
+
+                case ApplicationPage.Rtegister:
+                    return new RegisterPage();
 
                 default:
                     Debugger.Break();

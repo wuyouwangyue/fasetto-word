@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Fasetto.Word
+namespace Fasetto.Word.Core
 {
     public class ChatListDesignModel : ChatListViewModel
     {

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fasetto.Word
+namespace Fasetto.Word.Core
 {
     public static class ViewModelBaseHelper
     {

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{78AB665F-8A4
 		Doc\ScaleTransform 放大控件.txt = Doc\ScaleTransform 放大控件.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fasetto.Word.Core", "Fasetto.Word.Core\Fasetto.Word.Core.csproj", "{09518938-EA5E-4352-91D4-E37AE1C8E904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CCADC3EE-098C-410D-8428-07C643D35A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCADC3EE-098C-410D-8428-07C643D35A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCADC3EE-098C-410D-8428-07C643D35A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09518938-EA5E-4352-91D4-E37AE1C8E904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09518938-EA5E-4352-91D4-E37AE1C8E904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09518938-EA5E-4352-91D4-E37AE1C8E904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09518938-EA5E-4352-91D4-E37AE1C8E904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
