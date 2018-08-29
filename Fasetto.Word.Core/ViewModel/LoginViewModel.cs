@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System.Security;
 using System.Threading.Tasks;
@@ -51,6 +52,8 @@ namespace Fasetto.Word.Core
             //TODO Regitser
 
             await Task.Delay(1000);
+
+            IoC.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Login;
         }
     }
 }

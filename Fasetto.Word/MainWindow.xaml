@@ -139,7 +139,8 @@
             </Grid.ColumnDefinitions>
             
             <Frame x:Name="MainFrame" Grid.Column="1"
-                   Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
+                  
+                   Content="{Binding ApplicationDataContext.CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
 
             <local:SideMenuControl>
                 <local:ChatListControl/>

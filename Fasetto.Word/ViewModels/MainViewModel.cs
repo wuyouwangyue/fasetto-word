@@ -1,8 +1,6 @@
 using Fasetto.Word.Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -49,7 +47,8 @@ namespace Fasetto.Word
 
         public GridLength TitleHeightGridLength => new GridLength(this.TitleHeight + this.ResizeBorder);
 
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
+        public ApplicationViewModel ApplicationDataContext => IoC.Get<ApplicationViewModel>();
+
 
         #endregion
 
