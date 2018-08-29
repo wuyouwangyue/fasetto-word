@@ -21,10 +21,10 @@ namespace Fasetto.Word
 
         public BasePage()
         {
-            if (PageLoadAnimation != PageAnimationType.None)
-                Visibility = System.Windows.Visibility.Collapsed;
+            if (this.PageLoadAnimation != PageAnimationType.None)
+                this.Visibility = System.Windows.Visibility.Collapsed;
 
-            Loaded += BasePage_LoadedAsync;
+            Loaded += this.BasePage_LoadedAsync;
         }
 
 
@@ -40,29 +40,29 @@ namespace Fasetto.Word
 
         public async Task AnimateInAsync()
         {
-            if (PageLoadAnimation == PageAnimationType.None)
+            if (this.PageLoadAnimation == PageAnimationType.None)
                 return;
 
-            switch(PageLoadAnimation)
+            switch(this.PageLoadAnimation)
             {
                 case PageAnimationType.SlideAndFadeInFromRight:
 
-                    await this.SlideAndFadeInFromRightAsync(SlideSeconds);
+                    await this.SlideAndFadeInFromRightAsync(this.SlideSeconds);
 
                     break;
             }
         }
 
-        public async Task AnimateOutAnsync()
+        public async Task AnimateOutAsync()
         {
-            if (PageUnLoadAnimation == PageAnimationType.None)
+            if (this.PageUnLoadAnimation == PageAnimationType.None)
                 return;
 
-            switch(PageUnLoadAnimation)
+            switch(this.PageUnLoadAnimation)
             {
                 case PageAnimationType.SlideAndFadeOutToleft:
 
-                    await this.SlideAndFadeOutToLeftAsync(SlideSeconds);
+                    await this.SlideAndFadeOutToLeftAsync(this.SlideSeconds);
 
                     break;
             }

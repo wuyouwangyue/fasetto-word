@@ -8,11 +8,11 @@ namespace Fasetto.Word.Core
 
         public ChatListDesignModel()
         {
-            Items = new List<ChatListItemViewModel>
+            this.Items = new List<ChatListItemViewModel>
             {
                 new ChatListItemViewModel
                 {
-                     Name = "Luke",
+                    Name = "Luke",
                     Initials = "LM",
                     Message = "This new chat app is awesome! I bet it will be fast too",
                     ProfilePictureRGB = "3099c5",

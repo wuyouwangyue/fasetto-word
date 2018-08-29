@@ -10,7 +10,7 @@ namespace Fasetto.Word.Core
 {
     public static class ViewModelBaseHelper
     {
-        public static async Task RunCommand(this ViewModelBase viewModelBase, Expression<Func<bool>> updatingFlag, Func<Task> action)
+        public static async Task RunCommandAsync(this ViewModelBase viewModelBase, Expression<Func<bool>> updatingFlag, Func<Task> action)
         {
             if (updatingFlag.GetPropertyValue())
                 return;

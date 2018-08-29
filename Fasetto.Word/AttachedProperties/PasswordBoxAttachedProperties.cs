@@ -8,17 +8,16 @@ namespace Fasetto.Word
     {
         public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var passwordBox = sender as PasswordBox;
-            if (passwordBox == null)
+            if (!(sender is PasswordBox passwordBox))
                 return;
 
-            passwordBox.PasswordChanged -= PasswordBox_PasswordChanged;
+            passwordBox.PasswordChanged -= this.PasswordBox_PasswordChanged;
 
             if((bool)e.NewValue)
             {
                 HasTextProperty.SetValue(passwordBox);
 
-                passwordBox.PasswordChanged += PasswordBox_PasswordChanged;
+                passwordBox.PasswordChanged += this.PasswordBox_PasswordChanged;
             }
         }
 

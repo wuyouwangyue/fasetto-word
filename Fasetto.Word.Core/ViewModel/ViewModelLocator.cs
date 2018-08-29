@@ -21,13 +21,7 @@ namespace Fasetto.Word.Core.ViewModel
 
 
 
-        public LoginViewModel Login
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<LoginViewModel>();
-            }
-        }
+        public LoginViewModel Login => ServiceLocator.Current.GetInstance<LoginViewModel>();
 
 
         public static void Cleanup()

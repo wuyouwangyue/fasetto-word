@@ -10,7 +10,7 @@ namespace Fasetto.Word
     {
         #region Privete Members
 
-        private static T mInstance = null;
+        private static T Instance = null;
 
         #endregion
 
@@ -18,7 +18,7 @@ namespace Fasetto.Word
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return mInstance ?? (mInstance = new T());
+            return Instance ?? (Instance = new T());
         }
 
         #endregion

@@ -31,15 +31,15 @@ namespace Fasetto.Word.Core
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand<object>(async (parameter) => await LoginAsync(parameter));
-            RegisterComamnd = new RelayCommand(async () => await RegisterAsync());
+            this.LoginCommand = new RelayCommand<object>(async (parameter) => await LoginAsync(parameter));
+            this.RegisterComamnd = new RelayCommand(async () => await RegisterAsync());
         }
 
         #endregion
 
         public async Task LoginAsync(object parameter)
         {
-            await this.RunCommand(() => this.LoginIsRunning, async () =>
+            await this.RunCommandAsync(() => this.LoginIsRunning, async () =>
             {
                 await Task.Delay(1000);
                 var s = (parameter as IHavePassword)?.SecurePassword.Unsecure();

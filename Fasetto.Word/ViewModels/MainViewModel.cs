@@ -31,7 +31,7 @@ namespace Fasetto.Word
 
         public int OuterMarginSize
         {
-            get => mWindow.WindowState == WindowState.Minimized ? 0 : this.mOuterMarginSize;
+            get => this.mWindow.WindowState == WindowState.Minimized ? 0 : this.mOuterMarginSize;
             set => this.mOuterMarginSize = value;
         }
 
@@ -39,7 +39,7 @@ namespace Fasetto.Word
 
         public int WindowRadius
         {
-            get => mWindow.WindowState == WindowState.Maximized ? 0 : this.mWindowRadius;
+            get => this.mWindow.WindowState == WindowState.Maximized ? 0 : this.mWindowRadius;
             set => this.mWindowRadius = value;
         }
 
@@ -69,9 +69,9 @@ namespace Fasetto.Word
 
         public MainViewModel()
         {
-            mWindow = WindowHelper.GetWindow(typeof(MainWindow));
+            this.mWindow = WindowHelper.GetWindow(typeof(MainWindow));
 
-            mWindow.StateChanged += (sender, e) =>
+            this.mWindow.StateChanged += (sender, e) =>
             {
                 this.RaisePropertyChanged(nameof(this.ResizeBorderThickness));
                 this.RaisePropertyChanged(nameof(this.OuterMarginSize));
@@ -81,12 +81,12 @@ namespace Fasetto.Word
             };
 
 
-            this.MinimizeCommand = new RelayCommand(() => mWindow.WindowState = WindowState.Minimized);
-            this.MaximizeCommand = new RelayCommand(() => mWindow.WindowState ^= WindowState.Maximized);
-            this.CloseCommand = new RelayCommand(() => mWindow.Close());
-            this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetMousePosition()));
+            this.MinimizeCommand = new RelayCommand(() => this.mWindow.WindowState = WindowState.Minimized);
+            this.MaximizeCommand = new RelayCommand(() => this.mWindow.WindowState ^= WindowState.Maximized);
+            this.CloseCommand = new RelayCommand(() => this.mWindow.Close());
+            this.MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(this.mWindow, GetMousePosition()));
 
-            var resizer = new WindowResizer(mWindow);
+            var resizer = new WindowResizer(this.mWindow);
         }
 
         #endregion
@@ -95,9 +95,9 @@ namespace Fasetto.Word
 
         private Point GetMousePosition()
         {
-            var position = Mouse.GetPosition(mWindow);
+            var position = Mouse.GetPosition(this.mWindow);
 
-            return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
+            return new Point(position.X + this.mWindow.Left, position.Y + this.mWindow.Top);
         }
 
         #endregion

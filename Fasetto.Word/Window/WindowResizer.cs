@@ -95,16 +95,16 @@ namespace Fasetto.Word
 
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetCursorPos(out POINT lpPoint);
+        private static extern bool GetCursorPos(out POINT lpPoint);
 
         [DllImport("user32.dll")]
-        static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
+        private static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
+        private static extern IntPtr MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
 
         [DllImport("user32.dll")]
-        static extern IntPtr MonitorFromWindow(IntPtr hwnd, MonitorOptions dwFlags);
+        private static extern IntPtr MonitorFromWindow(IntPtr hwnd, MonitorOptions dwFlags);
 
         #endregion
 
@@ -145,7 +145,7 @@ namespace Fasetto.Word
         /// For example a second monitor on the right will have a Left position of
         /// the X resolution of the screens on the left
         /// </summary>
-        public Rect CurrentScreenSize => mScreenSize;
+        public Rect CurrentScreenSize => this.mScreenSize;
 
         #endregion
 
@@ -158,14 +158,14 @@ namespace Fasetto.Word
         /// <param name="adjustSize">The callback for the host to adjust the maximum available size if needed</param>
         public WindowResizer(Window window)
         {
-            mWindow = window;
+            this.mWindow = window;
 
             // Listen out for source initialized to setup
-            mWindow.SourceInitialized += Window_SourceInitialized;
+            this.mWindow.SourceInitialized += this.Window_SourceInitialized;
 
             // Monitor for edge docking
-            mWindow.SizeChanged += Window_SizeChanged;
-            mWindow.LocationChanged += Window_LocationChanged;
+            this.mWindow.SizeChanged += this.Window_SizeChanged;
+            this.mWindow.LocationChanged += this.Window_LocationChanged;
         }
 
         #endregion
@@ -180,7 +180,7 @@ namespace Fasetto.Word
         private void Window_SourceInitialized(object sender, System.EventArgs e)
         {
             // Get the handle of this window
-            var handle = (new WindowInteropHelper(mWindow)).Handle;
+            var handle = (new WindowInteropHelper(this.mWindow)).Handle;
             var handleSource = HwndSource.FromHwnd(handle);
 
             // If not found, end
@@ -188,7 +188,7 @@ namespace Fasetto.Word
                 return;
 
             // Hook into it's Windows messages
-            handleSource.AddHook(WindowProc);
+            handleSource.AddHook(this.WindowProc);
         }
 
         #endregion
@@ -216,27 +216,27 @@ namespace Fasetto.Word
             WmGetMinMaxInfo(IntPtr.Zero, IntPtr.Zero);
 
             // Get the monitor transform for the current position
-            mMonitorDpi = VisualTreeHelper.GetDpi(mWindow);
+            this.mMonitorDpi = VisualTreeHelper.GetDpi(this.mWindow);
 
             // Cannot calculate size until we know monitor scale
-            if (mMonitorDpi == null)
+            if (this.mMonitorDpi == null)
                 return;
 
             // Get window rectangle
-            var top = mWindow.Top;
-            var left = mWindow.Left;
-            var bottom = top + mWindow.Height;
-            var right = left + mWindow.Width;
+            var top = this.mWindow.Top;
+            var left = this.mWindow.Left;
+            var bottom = top + this.mWindow.Height;
+            var right = left + this.mWindow.Width;
 
             // Get window position/size in device pixels
-            var windowTopLeft = new Point(left * mMonitorDpi.Value.DpiScaleX, top * mMonitorDpi.Value.DpiScaleX);
-            var windowBottomRight = new Point(right * mMonitorDpi.Value.DpiScaleX, bottom * mMonitorDpi.Value.DpiScaleX);
+            var windowTopLeft = new Point(left * this.mMonitorDpi.Value.DpiScaleX, top * this.mMonitorDpi.Value.DpiScaleX);
+            var windowBottomRight = new Point(right * this.mMonitorDpi.Value.DpiScaleX, bottom * this.mMonitorDpi.Value.DpiScaleX);
 
             // Check for edges docked
-            var edgedTop = windowTopLeft.Y <= (mScreenSize.Top + mEdgeTolerance) && windowTopLeft.Y >= (mScreenSize.Top - mEdgeTolerance);
-            var edgedLeft = windowTopLeft.X <= (mScreenSize.Left + mEdgeTolerance) && windowTopLeft.X >= (mScreenSize.Left - mEdgeTolerance);
-            var edgedBottom = windowBottomRight.Y >= (mScreenSize.Bottom - mEdgeTolerance) && windowBottomRight.Y <= (mScreenSize.Bottom + mEdgeTolerance);
-            var edgedRight = windowBottomRight.X >= (mScreenSize.Right - mEdgeTolerance) && windowBottomRight.X <= (mScreenSize.Right + mEdgeTolerance);
+            var edgedTop = windowTopLeft.Y <= (this.mScreenSize.Top + this.mEdgeTolerance) && windowTopLeft.Y >= (this.mScreenSize.Top - this.mEdgeTolerance);
+            var edgedLeft = windowTopLeft.X <= (this.mScreenSize.Left + this.mEdgeTolerance) && windowTopLeft.X >= (this.mScreenSize.Left - this.mEdgeTolerance);
+            var edgedBottom = windowBottomRight.Y >= (this.mScreenSize.Bottom - this.mEdgeTolerance) && windowBottomRight.Y <= (this.mScreenSize.Bottom + this.mEdgeTolerance);
+            var edgedRight = windowBottomRight.X >= (this.mScreenSize.Right - this.mEdgeTolerance) && windowBottomRight.X <= (this.mScreenSize.Right + this.mEdgeTolerance);
 
             // Get docked position
             var dock = WindowDockPosition.Undocked;
@@ -268,12 +268,12 @@ namespace Fasetto.Word
                 dock = WindowDockPosition.Undocked;
 
             // If dock has changed
-            if (dock != mLastDock)
+            if (dock != this.mLastDock)
                 // Inform listeners
                 WindowDockChanged(dock);
 
             // Save last dock position
-            mLastDock = dock;
+            this.mLastDock = dock;
         }
 
         #endregion
@@ -301,13 +301,13 @@ namespace Fasetto.Word
 
                 // Once the window starts being moved
                 case 0x0231: // WM_ENTERSIZEMOVE
-                    mBeingMoved = true;
+                    this.mBeingMoved = true;
                     WindowStartedMove();
                     break;
 
                 // Once the window has finished being moved
                 case 0x0232: // WM_EXITSIZEMOVE
-                    mBeingMoved = false;
+                    this.mBeingMoved = false;
                     WindowFinishedMove();
                     break;
             }
@@ -329,7 +329,7 @@ namespace Fasetto.Word
             GetCursorPos(out var lMousePosition);
 
             // Now get the current screen
-            var lCurrentScreen = mBeingMoved ?
+            var lCurrentScreen = this.mBeingMoved ?
                 // If being dragged get it from the mouse position
                 MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONULL) : 
                 // Otherwise get it from the window position (for example being moved via Win + Arrow)
@@ -351,10 +351,10 @@ namespace Fasetto.Word
             // NOTE: Always update it
             // If this has changed from the last one, update the transform
             //if (lCurrentScreen != mLastScreen || mMonitorDpi == null)
-                mMonitorDpi = VisualTreeHelper.GetDpi(mWindow);
+            this.mMonitorDpi = VisualTreeHelper.GetDpi(this.mWindow);
 
             // Store last know screen
-            mLastScreen = lCurrentScreen;
+            this.mLastScreen = lCurrentScreen;
 
             // Get work area sizes and rations
             var currentX = lCurrentScreenInfo.RCWork.Left - lCurrentScreenInfo.RCMonitor.Left;
@@ -406,7 +406,7 @@ namespace Fasetto.Word
                 lMmi.PointMaxSize.Y = lPrimaryScreenInfo.RCMonitor.Bottom;
 
                 // Set min size
-                var minSize = new Point(mWindow.MinWidth * mMonitorDpi.Value.DpiScaleX, mWindow.MinHeight * mMonitorDpi.Value.DpiScaleX);
+                var minSize = new Point(this.mWindow.MinWidth * this.mMonitorDpi.Value.DpiScaleX, this.mWindow.MinHeight * this.mMonitorDpi.Value.DpiScaleX);
                 lMmi.PointMinTrackSize.X = (int)minSize.X;
                 lMmi.PointMinTrackSize.Y = (int)minSize.Y;
 
@@ -415,18 +415,18 @@ namespace Fasetto.Word
             }
 
             // Set monitor size
-            CurrentMonitorSize = new Rectangle(currentX, currentY, currentWidth + currentX, currentHeight + currentY);
+            this.CurrentMonitorSize = new Rectangle(currentX, currentY, currentWidth + currentX, currentHeight + currentY);
 
             // Get margin around window
-            CurrentMonitorMargin = new Thickness(
-                (lCurrentScreenInfo.RCWork.Left - lCurrentScreenInfo.RCMonitor.Left) / mMonitorDpi.Value.DpiScaleX,
-                (lCurrentScreenInfo.RCWork.Top - lCurrentScreenInfo.RCMonitor.Top) / mMonitorDpi.Value.DpiScaleY,
-                (lCurrentScreenInfo.RCMonitor.Right - lCurrentScreenInfo.RCWork.Right) / mMonitorDpi.Value.DpiScaleX,
-                (lCurrentScreenInfo.RCMonitor.Bottom - lCurrentScreenInfo.RCWork.Bottom) / mMonitorDpi.Value.DpiScaleY
+            this.CurrentMonitorMargin = new Thickness(
+                (lCurrentScreenInfo.RCWork.Left - lCurrentScreenInfo.RCMonitor.Left) / this.mMonitorDpi.Value.DpiScaleX,
+                (lCurrentScreenInfo.RCWork.Top - lCurrentScreenInfo.RCMonitor.Top) / this.mMonitorDpi.Value.DpiScaleY,
+                (lCurrentScreenInfo.RCMonitor.Right - lCurrentScreenInfo.RCWork.Right) / this.mMonitorDpi.Value.DpiScaleX,
+                (lCurrentScreenInfo.RCMonitor.Bottom - lCurrentScreenInfo.RCWork.Bottom) / this.mMonitorDpi.Value.DpiScaleY
                 );
 
             // Store new size
-            mScreenSize = new Rect(lCurrentScreenInfo.RCWork.Left, lCurrentScreenInfo.RCWork.Top, currentWidth, currentHeight);
+            this.mScreenSize = new Rect(lCurrentScreenInfo.RCWork.Left, lCurrentScreenInfo.RCWork.Top, currentWidth, currentHeight);
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace Fasetto.Word
             GetCursorPos(out var lMousePosition);
 
             // Apply DPI scaling
-            return new Point(lMousePosition.X / mMonitorDpi.Value.DpiScaleX, lMousePosition.Y / mMonitorDpi.Value.DpiScaleY);
+            return new Point(lMousePosition.X / this.mMonitorDpi.Value.DpiScaleX, lMousePosition.Y / this.mMonitorDpi.Value.DpiScaleY);
         }
     }
 
@@ -474,10 +474,10 @@ namespace Fasetto.Word
 
         public Rectangle(int left, int top, int right, int bottom)
         {
-            Left = left;
-            Top = top;
-            Right = right;
-            Bottom = bottom;
+            this.Left = left;
+            this.Top = top;
+            this.Right = right;
+            this.Bottom = bottom;
         }
     }
 
@@ -515,13 +515,13 @@ namespace Fasetto.Word
         /// </summary>
         public POINT(int x, int y)
         {
-            X = x;
-            Y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         public override string ToString()
         {
-            return $"{X} {Y}";
+            return $"{this.X} {this.Y}";
         }
     }
 
