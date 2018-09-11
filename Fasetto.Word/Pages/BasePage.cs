@@ -47,7 +47,7 @@ namespace Fasetto.Word
             {
                 case PageAnimationType.SlideAndFadeInFromRight:
 
-                    await this.SlideAndFadeInFromRightAsync(this.SlideSeconds);
+                    await this.SlideAndFadeInFromRightAsync(this.SlideSeconds, size: (int)this.WindowWidth);
 
                     break;
             }

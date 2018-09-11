@@ -6,6 +6,8 @@ namespace Fasetto.Word.Core
     {
         public ApplicationPage CurrentPage { get; set; }
 
+        public bool SideMenuVisile { get; set; } = true;
+
         public ApplicationViewModel()
         {
             this.CurrentPage = ApplicationPage.Rtegister;

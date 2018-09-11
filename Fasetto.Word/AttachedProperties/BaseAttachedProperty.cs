@@ -10,6 +10,8 @@ namespace Fasetto.Word
 
         public event Action<DependencyObject, DependencyPropertyChangedEventArgs> ValueChanged = (sender, e) => { };
 
+        public event Action<DependencyObject, object> ValueUpdated = (sender, value) => { };
+
         #endregion
 
         #region Public Properties
@@ -27,8 +29,10 @@ namespace Fasetto.Word
                 typeof(BaseAttachedProperty<Parent, Property>),
                 new UIPropertyMetadata(
                     default(Property),
-                    new PropertyChangedCallback(OnValuePropertyChanged)
+                    new PropertyChangedCallback(OnValuePropertyChanged),
+                    new CoerceValueCallback(OnValuePropertyUpdated)
                 ));
+
 
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -37,6 +41,17 @@ namespace Fasetto.Word
 
             // Call event listeners
             (Instance as BaseAttachedProperty<Parent, Property>)?.ValueChanged(d, e);
+        }
+
+        private static object OnValuePropertyUpdated(DependencyObject d, object value)
+        {
+            // Call the parent function
+            (Instance as BaseAttachedProperty<Parent, Property>)?.OnValueUpdated(d, value);
+
+            // Call event listeners
+            (Instance as BaseAttachedProperty<Parent, Property>)?.ValueUpdated(d, value);
+
+            return value;
         }
 
         public static Property GetValue(DependencyObject d) => (Property)d.GetValue(ValueProperty);
@@ -48,6 +63,8 @@ namespace Fasetto.Word
         #region Event Methods
 
         public virtual void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) { }
+        public virtual void OnValueUpdated(DependencyObject sender, object value) { }
+
 
         #endregion
     }

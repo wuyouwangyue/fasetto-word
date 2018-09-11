@@ -50,6 +50,7 @@
 
                     <Button Style="{StaticResource TextButton}" 
                             Content="Or, create a free account..." 
+                            Command="{Binding RegisterComamnd}"
                             HorizontalAlignment="Center"/>
                 </StackPanel>
 

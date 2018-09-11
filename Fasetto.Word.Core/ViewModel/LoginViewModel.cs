@@ -50,10 +50,14 @@ namespace Fasetto.Word.Core
         public async Task RegisterAsync()
         {
             //TODO Regitser
+            await Task.Delay(10);
 
-            await Task.Delay(1000);
+            IoC.Get<ApplicationViewModel>().SideMenuVisile ^= true;
 
-            IoC.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Login;
+            //if(IoC.Get<ApplicationViewModel>().CurrentPage == ApplicationPage.Login)
+            //    IoC.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Rtegister;
+            //else
+            //    IoC.Get<ApplicationViewModel>().CurrentPage = ApplicationPage.Login;
         }
     }
 }

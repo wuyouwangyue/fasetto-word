@@ -81,7 +81,7 @@
                                     </Grid>
 
                                     <!-- 分割线 -->
-                                    <Border Grid.Row="1" Height="6" BorderThickness="0,0.2,0,0">
+                                    <Border Grid.Row="1" Height="6" BorderThickness="0,0.2,0,0" Visibility="Collapsed">
                                         <Border.BorderBrush>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                                 <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"/>
@@ -100,7 +100,7 @@
                                     </Border>
 
                                     <!-- 内容展示 -->
-                                    <Border Grid.Row="2" Padding="{Binding InnerContentPadding}">
+                                    <Border Grid.Row="2" Padding="0">
                                         <ContentPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                     
@@ -134,7 +134,7 @@
                         />
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
@@ -142,7 +142,7 @@
                   
                    Content="{Binding ApplicationDataContext.CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
 
-            <local:SideMenuControl>
+            <local:SideMenuControl local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationDataContext.SideMenuVisile}" Width="300">
                 <local:ChatListControl/>
             </local:SideMenuControl>
 
