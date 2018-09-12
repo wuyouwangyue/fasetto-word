@@ -18,7 +18,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border Padding="{Binding OuterMaginSizeThickness, FallbackValue=10}">
+                        <Border Margin="{Binding OuterMaginSizeThickness, FallbackValue=10}">
                             <Grid>
                                 <!-- 圆角主界面 -->
                                 <Border x:Name="Container"
@@ -100,7 +100,7 @@
                                     </Border>
 
                                     <!-- 内容展示 -->
-                                    <Border Grid.Row="2" Padding="0">
+                                    <Border Grid.Row="2" Padding="0" ClipToBounds="True">
                                         <ContentPresenter Content="{TemplateBinding Content}"/>
                                     </Border>
                                     

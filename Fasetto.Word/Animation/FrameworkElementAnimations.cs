@@ -7,7 +7,6 @@ namespace Fasetto.Word
 {
     public static class FrameworkElementAnimations
     {
-
         #region Slide And Fade In From Left/Right
 
         public static async Task SlideAndFadeInFromRightAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int size = 0)
